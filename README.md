@@ -12,30 +12,27 @@ Mickaël Launay alias Micmaths is a French 250K-subscriber YouTuber. As his chan
 Codefights is an interesting website with challenges to solve so that recruiters can later connect with you if you get a good score. Once you submit your code, it is tested against several known and unknown tests to check if it handles all possible cases.
 On this website I encountered the following challenge under the `Uber Bot` category:
 - consider a city that is a perfect infinite square grid, hence each road can be represented as straight lines defined by `x = n` or `y = n` where `n` is an integer
-- a car is going from point A to point B and the goal of the challenge is to determine the shortest path between these two points
+- a car is going from point A to point B and the goal of the challenge is to determine the length of the shortest path between these two points
   - let's say the departure point (A) is `[0.4, 1]` and the destination point (B) is `[0.9, 3]` then the output should be `2.7` as visible on the diagram below
-- Note: in the challenge, it was guaranteed that every coordinate was positive. Also, it is easy to notice that in a [x ; y] couple of coordinates, at least one of the two coordinates is an integer (otherwise, the car would be off the road)
+- Note: in the challenge, it was guaranteed that every coordinate is positive. Also, it is easy to notice that in a `[x ; y]` couple of coordinates, at least one of the two coordinates is an integer (otherwise, the car would be off the road)
 
 ### Diagram
 
 - A: `[0.4, 1]`
 - B: `[0.9, 3]`
-- => The shortest path, drawn as `#`, is: `2 [y-axis] + 0.1 [1 - 0.9] + 0.6 [1 - 0.4]` = `2.7`
+- The length of the shortest path, drawn as `#`, is: `2 [y-axis] + 0.6 [corresponding to 1 - 0.4 for A] + 0.1 [corresponding to 1 - 0.9 for B]` = `2.7`
 
 ```
- ...           ...
-3 +--B#---+---+
-  |   #   |   |
-  |   #   |   |
-  |   #   |   |
-2 +---#---+---+
-  |   #   |   |
-  |   #   |   |
-  |   #   |   |
-1 +-A##---+---+
-  |   |   |   |
-  |   |   |   |
-  |   |   |   |
-0 +---+---+---+ ...
-  0   1   2   3
+ ...                    ...
+3 +----B##------+------+
+  |      #      |      |
+  |      #      |      |
+2 +------#------+------+
+  |      #      |      |
+  |      #      |      |
+1 +--A####------+------+
+  |      |      |      |
+  |      |      |      |
+0 +------+------+------+ ...
+  0 0.4  1      2      3
 ```

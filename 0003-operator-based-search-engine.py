@@ -63,26 +63,26 @@ def get_symmetric_difference_ids(elements_ids_1, elements_ids_2):
 def get_elements(search_query):
     if (search_query == "ALL"):
         return get_all_elements_ids()
-    # Unary operator
-    if ("NOT" in search_query):
-        decomposed_search_query = search_query.split(' ')
-        return get_all_elements_ids_except_label(decomposed_search_query[1])
     # Binary operators
-    if ("OR" in search_query or "AND" in search_query or "XOR" in search_query or "NAND" in search_query or "NOR" in search_query or "XNOR" in search_query):
+    if ("OR" in search_query or "AND" in search_query or "XOR" in search_query or "AND_NOT" in search_query or "OR_NOT" in search_query or "XOR_NOT" in search_query):
         decomposed_search_query = search_query.split(' ')
         matching_elements_ids_1 = get_elements_ids_based_on_label(decomposed_search_query[0])
 
-        if ("NAND" in search_query or "NOR" in search_query or "XNOR" in search_query):
+        if ("AND_NOT" in search_query or "OR_NOT" in search_query or "XOR_NOT" in search_query):
             matching_elements_ids_2 = get_all_elements_ids_except_label(decomposed_search_query[2])
         else:
             matching_elements_ids_2 = get_elements_ids_based_on_label(decomposed_search_query[2])
 
-        if ("XNOR" in search_query or "XOR" in search_query):
+        if ("XOR_NOT" in search_query or "XOR" in search_query):
             return get_symmetric_difference_ids(matching_elements_ids_1, matching_elements_ids_2)
-        if ("NOR" in search_query or "OR" in search_query):
+        if ("OR_NOT" in search_query or "OR" in search_query):
             return get_union_ids(matching_elements_ids_1, matching_elements_ids_2)
-        if ("NAND" in search_query or "AND" in search_query):
+        if ("AND_NOT" in search_query or "AND" in search_query):
             return get_intersection_ids(matching_elements_ids_1, matching_elements_ids_2)
+    # Unary operator
+    if ("NOT" in search_query):
+        decomposed_search_query = search_query.split(' ')
+        return get_all_elements_ids_except_label(decomposed_search_query[1])
     return get_elements_ids_based_on_label(search_query)
 
 # Tests
@@ -135,20 +135,20 @@ print(elements_are_identical(results, []))
 results = get_elements("eminem XOR eminem")
 print(elements_are_identical(results, []))
 
-results = get_elements("eminem NAND ed_sheeran")
+results = get_elements("eminem AND_NOT ed_sheeran")
 print(elements_are_identical(results, [0]))
 
-results = get_elements("eminem NAND eminem")
+results = get_elements("eminem AND_NOT eminem")
 print(elements_are_identical(results, []))
 
-results = get_elements("eminem NOR ed_sheeran")
+results = get_elements("eminem OR_NOT ed_sheeran")
 print(elements_are_identical(results, [0, 1, 2, 3, 4]))
 
-results = get_elements("eminem NOR eminem")
+results = get_elements("eminem OR_NOT eminem")
 print(elements_are_identical(results, [0, 1, 2, 3, 4, 5]))
 
-results = get_elements("eminem XNOR ed_sheeran")
+results = get_elements("eminem XOR_NOT ed_sheeran")
 print(elements_are_identical(results, [1, 2, 3, 4]))
 
-results = get_elements("eminem XNOR eminem")
+results = get_elements("eminem XOR_NOT eminem")
 print(elements_are_identical(results, [0, 1, 2, 3, 4, 5]))

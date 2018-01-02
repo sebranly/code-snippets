@@ -57,9 +57,9 @@ So I came up with an idea: I'd love to have a system that enables me to write a 
     - `AND` (e.g. `eminem AND tupac` in order to get songs featuring both Eminem and Tupac)
     - `OR` (e.g. `eminem OR tupac` in order to get both songs by Eminem and songs by Tupac)
 	- `XOR` (e.g. `eminem XOR tupac` in order to get both songs by Eminem and songs by Tupac, by excluding songs featuring both of them though)
-	- `NAND` (e.g. `eminem NAND tupac` in order to get songs by Eminem, by excluding songs featuring both of them though)
-	- `NOR` (e.g. `eminem NOR tupac` in order to get all possible songs, minus the songs by Tupac except the ones Tupac made with Eminem (these ones are kept)
-	- `XNOR` (e.g. `eminem XNOR tupac` in order to get all possible songs, minus the songs by Eminem without Tupac and minus the songs by Tupac without Eminem (i.e. songs featuring both of them are kept))
+	- `AND_NOT` (e.g. `eminem AND_NOT tupac` in order to get songs by Eminem, by excluding songs featuring both of them though)
+	- `OR_NOT` (e.g. `eminem OR_NOT tupac` in order to get all possible songs, minus the songs by Tupac except the ones Tupac made with Eminem (these ones are kept)
+	- `XOR_NOT` (e.g. `eminem XOR_NOT tupac` in order to get all possible songs, minus the songs by Eminem without Tupac and minus the songs by Tupac without Eminem (i.e. songs featuring both of them are kept))
   - Others
 	- `ALL` (e.g. `ALL` in order to get all the songs from the playlist)
 - It is also possible to only type a label (e.g. `eminem` in order to get songs by Eminem)

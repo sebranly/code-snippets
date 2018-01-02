@@ -65,6 +65,24 @@ So I came up with an idea: I'd love to have a system that enables me to write a 
 - It is also possible to only type a label (e.g. `eminem` in order to get songs by Eminem)
 
 In order to check this search engine is correctly implemented, I added tests at the end of it with expected results. Everything should be `True`.
+
+##### Truth tables
+
+`A` and `B` are inputs
+```
+              INPUTS                 OUTPUTS
++---+-----+  +---+---++-----+-----+-----+-----+-----+-----+
+| A | NOT |  | A | B || AND | NAND|  OR | NOR | XOR | XNOR|
++---+-----+  +---+---++-----+-----+-----+-----+-----+-----+
+| 0 |  1  |  | 0 | 0 ||  0  |  1  |  0  |  1  |  0  |  1  |
++---+-----+  +---+---++-----+-----+-----+-----+-----+-----+
+| 1 |  0  |  | 0 | 1 ||  0  |  1  |  1  |  0  |  1  |  0  |
++---+-----+  +---+---++-----+-----+-----+-----+-----+-----+
+             | 1 | 0 ||  0  |  1  |  1  |  0  |  1  |  0  |
+			 +---+---++-----+-----+-----+-----+-----+-----+
+			 | 1 | 1 ||  1  |  0  |  1  |  0  |  0  |  1  |
+			 +---+---++-----+-----+-----+-----+-----+-----+
+```
 	
 #### Future state (not implemented yet)
 

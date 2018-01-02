@@ -68,18 +68,22 @@ def get_elements(search_query):
         decomposed_search_query = search_query.split(' ')
         return get_all_elements_ids_except_label(decomposed_search_query[1])
     # Binary operators
-    if ("OR" in search_query or "AND" in search_query or "XOR" in search_query):
+    if ("OR" in search_query or "AND" in search_query or "XOR" in search_query or "NAND" in search_query or "NOR" in search_query or "XNOR" in search_query):
         decomposed_search_query = search_query.split(' ')
         matching_elements_ids_1 = get_elements_ids_based_on_label(decomposed_search_query[0])
-        matching_elements_ids_2 = get_elements_ids_based_on_label(decomposed_search_query[2])
-        if ("XOR" in search_query):
+
+        if ("NAND" in search_query or "NOR" in search_query or "XNOR" in search_query):
+            matching_elements_ids_2 = get_all_elements_ids_except_label(decomposed_search_query[2])
+        else:
+            matching_elements_ids_2 = get_elements_ids_based_on_label(decomposed_search_query[2])
+
+        if ("XNOR" in search_query or "XOR" in search_query):
             return get_symmetric_difference_ids(matching_elements_ids_1, matching_elements_ids_2)
-        if ("OR" in search_query):
+        if ("NOR" in search_query or "OR" in search_query):
             return get_union_ids(matching_elements_ids_1, matching_elements_ids_2)
-        if ("AND" in search_query):
+        if ("NAND" in search_query or "AND" in search_query):
             return get_intersection_ids(matching_elements_ids_1, matching_elements_ids_2)
     return get_elements_ids_based_on_label(search_query)
-    return []
 
 # Tests
 
@@ -91,6 +95,9 @@ print(elements_are_identical(results, [2, 4]))
 
 results = get_elements("germany")
 print(elements_are_identical(results, []))
+
+results = get_elements("eminem")
+print(elements_are_identical(results, [0, 3]))
 
 results = get_elements("NOT us")
 print(elements_are_identical(results, [2, 4, 5]))
@@ -104,11 +111,17 @@ print(elements_are_identical(results, [0, 1, 3]))
 results = get_elements("macklemore OR snoop_dogg")
 print(elements_are_identical(results, []))
 
+results = get_elements("eminem OR eminem")
+print(elements_are_identical(results, [0, 3]))
+
 results = get_elements("eminem AND ed_sheeran")
 print(elements_are_identical(results, [3]))
 
 results = get_elements("eminem AND tupac")
 print(elements_are_identical(results, []))
+
+results = get_elements("eminem AND eminem")
+print(elements_are_identical(results, [0, 3]))
 
 results = get_elements("eminem XOR ed_sheeran")
 print(elements_are_identical(results, [0, 5]))
@@ -118,3 +131,24 @@ print(elements_are_identical(results, [2]))
 
 results = get_elements("macklemore XOR snoop_dogg")
 print(elements_are_identical(results, []))
+
+results = get_elements("eminem XOR eminem")
+print(elements_are_identical(results, []))
+
+results = get_elements("eminem NAND ed_sheeran")
+print(elements_are_identical(results, [0]))
+
+results = get_elements("eminem NAND eminem")
+print(elements_are_identical(results, []))
+
+results = get_elements("eminem NOR ed_sheeran")
+print(elements_are_identical(results, [0, 1, 2, 3, 4]))
+
+results = get_elements("eminem NOR eminem")
+print(elements_are_identical(results, [0, 1, 2, 3, 4, 5]))
+
+results = get_elements("eminem XNOR ed_sheeran")
+print(elements_are_identical(results, [1, 2, 3, 4]))
+
+results = get_elements("eminem XNOR eminem")
+print(elements_are_identical(results, [0, 1, 2, 3, 4, 5]))

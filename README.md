@@ -57,6 +57,9 @@ So I came up with an idea: I'd love to have a system that enables me to write a 
     - `AND` (e.g. `eminem AND tupac` in order to get songs featuring both Eminem and Tupac)
     - `OR` (e.g. `eminem OR tupac` in order to get both songs by Eminem and songs by Tupac)
 	- `XOR` (e.g. `eminem XOR tupac` in order to get both songs by Eminem and songs by Tupac, by excluding songs featuring both of them though)
+	- `NAND` (e.g. `eminem NAND tupac` in order to get songs by Eminem, by excluding songs featuring both of them though)
+	- `NOR` (e.g. `eminem NOR tupac` in order to get all possible songs, minus the songs by Tupac except the ones Tupac made with Eminem (these ones are kept)
+	- `XNOR` (e.g. `eminem XNOR tupac` in order to get all possible songs, minus the songs by Eminem without Tupac and minus the songs by Tupac without Eminem (i.e. songs featuring both of them are kept))
   - Others
 	- `ALL` (e.g. `ALL` in order to get all the songs from the playlist)
 - It is also possible to only type a label (e.g. `eminem` in order to get songs by Eminem)
@@ -66,7 +69,6 @@ In order to check this search engine is correctly implemented, I added tests at 
 #### Future state (not implemented yet)
 
 - The search engine is really limited for now.
-  - Some operators are still missing: `NAND`, `NOR`, `XNOR`
   - It should be possible to execute more complex queries including more than just two labels (e.g. `eminem AND tupac AND nekfeu`)
   - It should also be possible to use parentheses (`(` and `)`) in order to give a certain priority.
 - In the long-term, a nested query like `NOT (eminem AND (tupac OR snoop_dogg))` should be correct
